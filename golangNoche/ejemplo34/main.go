@@ -1,0 +1,21 @@
+package main
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+//https://gin-gonic.com/en/docs/examples/html-rendering/
+
+func main() {
+	router := gin.Default()
+	router.LoadHTMLGlob("templates/*")
+	//router.LoadHTMLFiles("templates/template1.html", "templates/template2.html")
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+			"title": "Titulo principal",
+		})
+	})
+	router.Run(":8080")
+}
